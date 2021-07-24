@@ -9,23 +9,21 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a = b; return 1; } re
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a = b; return 1; } return 0; }
 
 int main(){
-    ll N, M, T;
-    cin >> N >> M >> T;
-    ll tmp = N;
-    vector<int> A(M+1, 0), B(M+1, 0);
-    rep(i, 0, M) cin >> A[i+1] >> B[i+1];
-    int ans = 1;
-    rep(i, 1, M+1){
-        tmp -= A[i] - B[i-1];
-        if(tmp<=0){
-            ans = 0;
-            break;
+    int N;
+    cin >> N;
+    vector<vector<int>> A(3, vector<int>(N));
+    rep(i, 0, 3){
+        rep(j, 0, N) {
+            cin >> A[i][j];
         }
-        tmp += B[i] - A[i];
-        tmp = min(tmp, N);
-        // cout << tmp << endl;
     }
-    if(tmp<=T-B[M]) ans=0;
-    if(ans==1) cout << "Yes" << endl;
-    else cout << "No" << endl;
+    ll ans = 0;
+    map<int, int> mp;
+    rep(i, 0, N){
+        mp[A[1][A[2][i]-1]]+=1;
+    }
+    rep(i, 0, N){
+        ans += mp[A[0][i]];
+    }
+    cout << ans << endl;
 }
