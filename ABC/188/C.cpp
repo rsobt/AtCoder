@@ -11,17 +11,21 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a = b; return 1; } re
 int main(){
     int N;
     cin >> N;
-    vector<int> X(N), Y(N);
-    rep(i, 0, N) cin >> X[i] >> Y[i];
-    int ans = 0;
-    rep(i, 0, N){
-        rep(j, i+1, N){
-            rep(k, j+1, N){
-                if((Y[j]-Y[i])*(X[k]-X[i])==(Y[k]-Y[i])*(X[j]-X[i])) ans = 1;
-                if(ans) break;
-            }
-        }
+    int tmp = pow(2, N-1);
+    vector<pair<int, int>> A(tmp);
+    vector<pair<int, int>> B(tmp);
+    rep(i, 0, tmp){
+        int a;
+        cin >> a;
+        A[i] = make_pair(a, i+1);
     }
-    if(ans) cout << "Yes" << endl;
-    else cout << "No" << endl;
+    rep(i, 0, tmp){
+        int a;
+        cin >> a;
+        B[i] = make_pair(a, tmp+i+1);
+    }
+    sort(all(A));
+    sort(all(B));
+    if(A[tmp-1].first>B[tmp-1].first) cout << B[tmp-1].second << endl;
+    else cout << A[tmp-1].second << endl;
 }
