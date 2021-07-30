@@ -9,13 +9,12 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a = b; return 1; } re
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a = b; return 1; } return 0; }
 
 int main(){
-    ll N;
+    int N;
     cin >> N;
-    ll ans = pow(10, 13);
-    rep(i, 1, pow(N, 0.5)+1){
-        if(N%i==0){
-            ans = min(ans, i + N/i - 2);
-        }
-    }
-    cout << ans << endl;
+    vector<int> P(N);
+    rep(i, 0, N) cin >> P[i];
+    sort(all(P));
+    double ans = P[0];
+    rep(i, 1, N) ans = (ans + P[i]) / 2 ;
+    printf("%.10f", ans);
 }
