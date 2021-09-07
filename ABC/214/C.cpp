@@ -9,20 +9,11 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a = b; return 1; } re
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a = b; return 1; } return 0; }
 
 int main(){
-    ll Q, a, base = 0;
-    cin >> Q;
-    priority_queue<ll, vector<ll>, greater<ll>> q;
-    rep(i, 0, Q){
-        cin >> a;
-        if(a == 1){
-            cin >> a;
-            q.push(a - base);
-        } else if(a == 2){
-            cin >> a;
-            base += a;
-        } else if(a == 3){
-            cout << q.top() + base << endl;
-            q.pop();
-        }
-    }
+    int N;
+    cin >> N;
+    vector<int> S(N), T(N);
+    rep(i, 0, N) cin >> S[i];
+    rep(i, 0, N) cin >> T[i];
+    rep(i, 0, 2*N) chmin(T[i%N], T[(i+N-1)%N]+S[(i+N-1)%N]);
+    rep(i, 0, N) cout << T[i] << endl;
 }
